@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vyaasa Trade & Logistix</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    /* --- 1. RESET & VARIABLES --- */
+    :root {
+      --bg-dark: #050505;
+      --bg-card: #111111;
+      --text-main: #ffffff;
+      --text-muted: #a0a0a0;
+      --accent: #d4af37; /* Premium Gold */
+      --border: #2a2a2a;
+      --font-body: 'Inter', sans-serif;
+      --font-head: 'IBM Plex Sans', sans-serif;
+      --nav-height: 80px;
+      /* Gap between sections (approx 1 inch) */
+      --spacer-height: 6rem; 
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* --- 2. GLOBAL UTILITIES --- */
+    h1, h2, h3 {
+      font-family: var(--font-head);
+      font-weight: 500;
+      letter-spacing: -0.02em;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+      transition: color 0.3s ease;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    section {
+      padding: 6rem 1.5rem;
+      scroll-margin-top: var(--nav-height); 
+    }
+
+    /* Spacer Class */
+    .section-spacer {
+      width: 100%;
+      height: var(--spacer-height);
+      background-color: var(--bg-dark); 
+    }
+
+    /* --- 3. NAVIGATION --- */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: var(--nav-height);
+      background: rgba(5, 5, 5, 0.95);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-inner {
+      width: 100%;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo img {
+      height: 55px; 
+      width: auto;
+    }
+
+    .nav-menu {
+      display: flex;
+      gap: 3rem;
+      list-style: none;
+    }
+
+    .nav-menu a {
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-main);
+      position: relative;
+      padding: 5px 0;
+    }
+
+    .nav-menu a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--accent);
+      transition: width 0.3s ease;
+    }
+
+    .nav-menu a:hover { color: var(--accent); }
+    .nav-menu a:hover::after { width: 100%; }
+
+    /* --- 4. HERO SECTION --- */
+    .hero {
+      position: relative;
+      height: 100vh;
+      min-height: 600px;
+      background: url('BulkCarrier.png') center 60% / cover no-repeat;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start; /* Aligns content to top */
+      /* Padding top reduced to move text up, just below nav */
+      padding-top: calc(var(--nav-height) + 2rem); 
+      border-bottom: 1px solid var(--border);
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.8) 100%);
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* Updated Top Label */
+    .hero-eyebrow {
+      display: block;
+      font-family: 'Inter', sans-serif;  /* Kept original font */
+      font-size: 2.5rem; /* Exact requested size */
+      font-weight: 600;
+      letter-spacing: 0.001em;
+      color: var(--accent);
+      margin-bottom: 1.5rem; /* Minimal spacing */
+      text-transform: uppercase;
+      line-height: .75;
+    }
+
+    /* Updated Main H1 */
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 4.5rem);
+      line-height: 1.1;
+      max-width: 1100px;
+      color: #fff;
+    }
+
+    /* Smaller second line */
+    .hero-subtext {
+        display: block; 
+        font-size: 0.5em; /* Smaller size relative to H1 */
+        margin-top: 0.5rem;
+        font-weight: 400;
+        opacity: 1;
+    }
+
+    /* --- 5. ABOUT SECTION --- */
+    .about {
+      position: relative;
+      background: url('train.jpg') center / cover no-repeat;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 80vh;
+      margin-top: 0;
+      padding: 6rem 1.5rem;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .about::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.9);
+    }
+
+    .about-content {
+      position: relative;
+      z-index: 2;
+      max-width: 800px;
+      text-align: center;
+    }
+
+    .about h2 {
+      font-size: 2.5rem;
+      margin-bottom: 2rem;
+      color: #fff;
+    }
+
+    .about p {
+      color: #ccc;
+      margin-bottom: 1.5rem;
+      font-size: 1.1rem;
+      line-height: 1.8;
+    }
+
+    /* --- 6. DIVIDER IMAGE --- */
+    .divider {
+      width: 100%;
+      height: 50vh;
+      min-height: 400px;
+      background: url('ship.jpg') center center no-repeat;
+      background-size: cover; 
+      filter: grayscale(25%);
+      position: relative;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .divider::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.2);
+    }
+
+    /* --- 7. CONTACT SECTION --- */
+    .contact {
+      max-width: 600px;
+      margin: 0 auto;
+      text-align: center;
+      padding: 6rem 1.5rem 8rem 1.5rem;
+    }
+
+    .contact h2 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .contact-sub {
+      color: var(--accent);
+      margin-bottom: 3rem;
+      font-size: 1.1rem;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    input, textarea {
+      width: 100%;
+      background: transparent;
+      border: 1px solid var(--border);
+      padding: 1rem;
+      font-size: 1rem;
+      font-family: var(--font-body);
+      color: var(--text-main);
+      transition: border-color 0.3s ease, background 0.3s ease;
+      border-radius: 0;
+    }
+
+    input:focus, textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+      background: rgba(255,255,255,0.03);
+    }
+
+    textarea {
+      min-height: 150px;
+      resize: vertical;
+    }
+
+    button {
+      align-self: center;
+      padding: 1rem 3rem;
+      background: var(--text-main);
+      color: var(--bg-dark);
+      border: none;
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    button:hover {
+      background: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    /* --- 8. FOOTER --- */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      background: #000;
+    }
+
+    /* --- 9. RESPONSIVENESS --- */
+    @media (max-width: 768px) {
+      :root { 
+        --nav-height: auto; 
+        --spacer-height: 6rem;
+      }
+      
+      nav {
+        position: relative;
+        height: auto;
+        padding: 1rem 0;
+      }
+
+      .nav-inner {
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+
+      .nav-menu {
+        gap: 1.5rem;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .hero {
+        padding-top: 4rem;
+        height: auto;
+        min-height: 500px;
+        padding-bottom: 4rem;
+      }
+
+      .hero-eyebrow { font-size: 1.4rem; }
+      .hero h1 { font-size: 2.2rem; }
+      .hero-content { padding: 0 1.5rem; text-align: center; }
+      .about-content { text-align: center; }
+      .about h2 { font-size: 1.8rem; }
+      .about p { font-size: 1rem; text-align: left; }
+      
+      footer {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-inner">
+      <div class="logo">
+        <img src="logo.png" alt="Vyaasa Trade & Logistix" />
+      </div>
+      <ul class="nav-menu">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <section class="hero" id="home">
+    <div class="hero-content">
+      <span class="hero-eyebrow">Vyaasa Trade &amp; Logistix</span>
+      
+      <h1>
+        <span class="hero-subtext">Maritime &amp; Trade Solutions,</span>
+        <span class="hero-subtext">Made Simple.</span>
+      </h1>
+    </div>
+  </section>
+
+  <div class="section-spacer"></div>
+
+  <section class="about" id="about">
+    <div class="about-content">
+      <h2>Comprehensive Shipping &amp; Logistics Solutions</h2>
+      <p>We provide end-to-end maritime and logistics services with a strong focus on efficiency, compliance, and reliability. As experienced Shipping Agents and Custom House Agents, we handle vessel operations, cargo clearances, and regulatory formalities with precision and professionalism.</p>
+      <p>Our services extend beyond core shipping activities to include ship chandling, crew management support, and integrated logistics assistance, ensuring seamless coordination at every stage.</p>
+      <p>With deep industry knowledge and a proactive approach, we serve as a single-window solution for ship owners, charterers, importers, and exporters.</p>
+      <p>Committed to timely execution and operational excellence, we deliver dependable solutions tailored to the dynamic needs of the maritime and trade ecosystem.</p>
+    </div>
+  </section>
+
+  <div class="section-spacer"></div>
+
+  <div class="divider"></div>
+
+  <div class="section-spacer"></div>
+
+  <section class="contact" id="contact">
+    <h2>Contact Us</h2>
+    <p class="contact-sub">Drop us a line!</p>
+
+    <form action="mailto:ops@vyasagroup.com" method="POST" enctype="text/plain">
+      <input type="text" name="name" placeholder="Name" required aria-label="Name">
+      <input type="email" name="email" placeholder="Email" required aria-label="Email">
+      <textarea name="message" placeholder="Message" required aria-label="Message"></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+  </section>
+
+  <footer>
+    <div>&copy; 2025 Vyaasa Trade &amp; Logistix</div>
+    <div>Designed by S Rajan Aathreya</div>
+  </footer>
+
+</body>
+</html>
